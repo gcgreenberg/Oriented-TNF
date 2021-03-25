@@ -39,7 +39,6 @@ def parse_arguments():
 
 if __name__ == "__main__":
 	args = parse_arguments()
-	print(args)
 	print_matrix_info(**args)
 	os.makedirs(args['out_dir'], exist_ok=True)
 	orientation_matrix.make_matrix(**args)
