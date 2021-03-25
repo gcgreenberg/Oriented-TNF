@@ -3,8 +3,6 @@ import gzip
 import pandas as pd
 import numpy as np
 
-DATA_PATH = '/home/a-m/gcgreen2/data/'
-GENOMES_PATH = os.path.join(DATA_PATH,'genomic/')
 BASES = {'A','T','C','G'}
 
 def parse_fasta(genome):
