@@ -1,7 +1,7 @@
 import sys
 import os
 import argparse
-from invert import orientation_matrix, detect_inversions, find_repeats
+from invert import orientation_matrix, detect_inversions, find_repeats, correct_inversion
 from invert.utils import genome_utils
 
 def print_banner(x):
@@ -25,8 +25,6 @@ def get_default_chrom_id(genome_file):
 	return list(chroms.keys())[0]
 
 def parse_arguments():
-#	genome_file = input('Enter path to genome file (.fasta[.gz]): ')
-#	out_dir = input('Enter path to output directory: ')
 	parser = argparse.ArgumentParser(description='Detect inversions in a genome')
 	parser.add_argument('--chrom', type=str, dest='chrom_id',
 			help='Chromsome/Sequence id')
@@ -40,11 +38,13 @@ def parse_arguments():
 			help='Do not correct detected misassembly')
 	parser.add_argument('--no-png', action='store_false', dest='save_png', default=True,
 			help='Do not save orientation matrix heatmap png.')
+	parser.add_argument('--save-files', action='store_true', dest='save_tmp_files', default=False,
+			help='Save temporary files (nucmer outputs, unzipped genome, matrix data)')
 	parser.add_argument('--nucmer', dest='nucmer_path', type=str, default='nucmer',
 			help='Path to nucmer executable (default assumes already in PATH)')
-	parser.add_argument('genome_file', type=str,
+	parser.add_argument('--genome', type=str, dest='genome_file', required=True,
 			help='Genome file. File types supported: .fasta, .fasta.gz')
-	parser.add_argument('out_dir', type=str,
+	parser.add_argument('--out', type=str, dest='out_dir', required=True,
 			help='Output directory')
 	args = vars(parser.parse_args())
 	return args
@@ -72,6 +72,8 @@ if __name__ == "__main__":
 
 		if best_repeat is not None:
 			print_banner('CORRECTING MISASSEMBLY')
-
-	#os.system('rm -r {}'.format(os.path.join(out_dir,'tmp')))
+			correct_inversion.correct(best_repeat=best_repeat, **args)
+	
+	if not args['save_tmp_files']:
+		os.system('rm -r {}'.format(os.path.join(out_dir,'tmp')))
 		
