@@ -2,9 +2,8 @@ import sys
 import os
 import numpy as np
 
-sys.path.append('/home/a-m/gcgreen2/code/repeat_finding/utils')
-import genome_utils 
-import tnf_utils
+from invert.utils import genome_utils 
+from invert.utils import tnf_utils
 
 def get_best_repeat(outdir):
     repeats_file = os.path.join(outdir, 'candidate_repeats.tsv')

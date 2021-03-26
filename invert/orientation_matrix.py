@@ -21,7 +21,7 @@ def make_png(out_dir, ori_mat, chrom_len, window_len, stride):
 	plt.savefig(png_file)
 
 def write_matrix(out_dir, ori_mat, window_locs, chrom_len):
-	mat_file = os.path.join(out_dir, 'matrix_data.npy')
+	mat_file = os.path.join(out_dir, 'tmp', 'matrix_data.npy')
 	data = np.array([ori_mat, window_locs, chrom_len], dtype=object)
 	np.save(mat_file, data)
 

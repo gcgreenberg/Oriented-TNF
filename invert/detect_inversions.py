@@ -3,7 +3,6 @@ import os
 import numpy as np
 from sklearn.decomposition import PCA
 
-sys.path.append('/home/a-m/gcgreen2/code/repeat_finding/utils')
 from invert.utils import genome_utils
 from invert.utils import tnf_utils
 
@@ -13,12 +12,14 @@ class Range:
 		self.center = max(center,0)
 		self.lower = max(center-radius,0)
 		self.upper = center+radius
+	def __eq__(self, other):
+		if self.center == other.center: 
+			return True
 
 def get_trans_ranges(trans_idx, window_locs, window_len, stride, padding=0):
 	trans_pts = [window_locs[i]-stride//2+window_len//2 for i in trans_idx]
 	radius = stride//2 + padding
 	trans_ranges = [Range(pt,radius) for pt in trans_pts]
-	print(trans_idx,trans_pts,radius,trans_ranges)
 	return trans_ranges
 
 def project_mat(ori_mat):
@@ -57,7 +58,7 @@ def print_transitions(trans_ranges, seq_len):
 		print('No inversions detected')
 
 def load_data(out_dir):
-	data_file = os.path.join(out_dir, 'matrix_data.npy')
+	data_file = os.path.join(out_dir, 'tmp', 'matrix_data.npy')
 	return np.load(data_file, allow_pickle=True)
 
 

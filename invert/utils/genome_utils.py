@@ -10,7 +10,7 @@ def parse_fasta(genome):
     genome = genome.split('>')[1:]
     for chrom in genome:
         chrom = chrom.split('\n')
-        chrom_id = chrom[0]
+        chrom_id = chrom[0].split(' ')[0]
         chrom = ''.join(chrom[1:])
         for char in set(chrom).difference({'A','T','C','G'}):
             chrom = chrom.replace(char,'')
