@@ -30,8 +30,10 @@ Must be run in the Oriented-TNF directory! Description of inputs and options can
 
 Example on preinstalled  *L. borgpetersenii* genome (assuming nucmer executable is in PATH):
 
-``python3 detect.py --window 50000 \
+.. code-block:: javascript
+
+python3 detect.py --window 50000 \
                     --stride 25000 \
                     --pad 10000 \
                     --genome data/L_borgpetersenii.fasta.gz \
-                    --out data/test``
+                    --out data/test
