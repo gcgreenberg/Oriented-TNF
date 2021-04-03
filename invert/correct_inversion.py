@@ -31,9 +31,11 @@ def write_corrected_fasta(genome_file, outdir, corrected_chroms):
 	new_file = os.path.join(outdir, new_file)
 	print('making inversion-corrected chromosome, filename {}'.format(new_file))
 	genome_utils.write_fasta(new_file, corrected_chroms)
+	return new_file
 
 def correct(genome_file, out_dir, best_repeat, chrom_id, **args):
 	old_chroms = genome_utils.get_chromosomes(genome_file)
 	corrected_chroms = reinvert_misassembly(old_chroms, best_repeat, chrom_id)
-	write_corrected_fasta(genome_file, out_dir, corrected_chroms)
+	new_file = write_corrected_fasta(genome_file, out_dir, corrected_chroms)
+	return new_file
 

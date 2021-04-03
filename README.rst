@@ -28,12 +28,40 @@ Must be run in the Oriented-TNF directory! Description of inputs and options can
     
 ``python3 detect.py -h``
 
-Example on preinstalled  *L. borgpetersenii* genome (assuming nucmer executable is in PATH):
+Note that the path to the nucmer executable must be supplied (with ``--nucmer``) if not in PATH.
 
-.. code-block:: javascript
+Example 1: *L. borgpetersenii* genome
+---------------
 
-python3 detect.py --window 50000 \
-                    --stride 25000 \
-                    --pad 10000 \
-                    --genome data/L_borgpetersenii.fasta.gz \
-                    --out data/test
+.. code-block:: python3
+
+    python3 detect.py --window 50000 \
+                      --stride 25000 \
+                      --pad 10000 \
+                      --genome data/L_borgpetersenii.fasta.gz \
+                      --out data/test1
+
+The script outputs a heatmap of the orientation matrix of the original genome file:
+
+.. image:: data/test1/orientation_mat.png
+  :width: 300
+
+A misassembly is detected in the genome. The inversion is correct, and the script outputs a corrected genome in fasta format, and the corresponding orientation matrix heatmap:
+
+.. image:: data/test1/orientation_mat_corrected.png
+  :width: 300
+
+Example 2: *L. rhamnosus* genome
+----------------
+
+.. code-block:: python3
+
+    python3 detect.py --window 100000 \
+                      --stride 50000 \
+                      --genome data/L_rhamnosus.fasta.gz \
+                      --out data/test2
+
+In this example, no misassembly is detected. The script outputs the location of the detected *origin* and *terminus* replication sites (1.1Mbp and 2.6Mbp) as well as the heatmap:
+
+.. image:: data/test2/orientation_mat.png
+  :width: 300

@@ -24,6 +24,13 @@ def get_default_chrom_id(genome_file):
 	chroms = genome_utils.get_chromosomes(genome_file)
 	return list(chroms.keys())[0]
 
+def get_corrected_args(cor_genome_file, **args):
+	corrected_args = args.copy()
+	corrected_args['save_png'] = True
+	corrected_args['png_name'] = 'orientation_mat_corrected.png'
+	corrected_args['genome_file'] = cor_genome_file
+	return corrected_args
+
 def parse_arguments():
 	parser = argparse.ArgumentParser(description='Detect inversions in a genome')
 	parser.add_argument('--chrom', type=str, dest='chrom_id',
@@ -47,6 +54,7 @@ def parse_arguments():
 	parser.add_argument('--out', type=str, dest='out_dir', required=True,
 			help='Output directory')
 	args = vars(parser.parse_args())
+	args['png_name'] = 'orientation_mat.png'
 	return args
 
 if __name__ == "__main__":
@@ -72,7 +80,10 @@ if __name__ == "__main__":
 
 		if best_repeat is not None:
 			print_banner('CORRECTING MISASSEMBLY')
-			correct_inversion.correct(best_repeat=best_repeat, **args)
+			cor_genome_file = correct_inversion.correct(best_repeat=best_repeat, **args)
+			print_banner('MAKING CORRECTED ORIENTATION MATRIX')
+			corrected_args = get_corrected_args(cor_genome_file, **args)
+			orientation_matrix.make_matrix(**corrected_args)
 	
 	if not args['save_tmp_files']:
 		os.system('rm -r {}'.format(os.path.join(out_dir,'tmp')))
