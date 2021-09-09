@@ -1,9 +1,9 @@
 import sys
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 from invert.utils import genome_utils
 from invert.utils import tnf_utils

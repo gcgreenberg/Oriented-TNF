@@ -15,8 +15,8 @@ class Repeat:
 		self.end1 = int(rep[1])
 		self.end2 = int(rep[4])
 		self.idy = float(rep[9])
-		self.seq_id1 = rep[11]
-		self.seq_id2 = rep[12]
+		self.seq_id1 = rep[17]
+		self.seq_id2 = rep[18]
 
 def parse_repeats_file(out_dir, chrom_id):
 	repeats_file = os.path.join(out_dir, 'tmp', 'nuc.coords')
