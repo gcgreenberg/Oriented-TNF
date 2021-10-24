@@ -36,8 +36,8 @@ def rep_in_ranges(repeat, trans_ranges):
 				if i1 == i2: continue
 			   # if repeats are in regions thats correspond to opposite transitions
 				if (repeat.start2 >= range2.lower) and \
-						(repeat.start2 <= range2.upper) and \
-						(range1 != range2):
+					(repeat.start2 <= range2.upper) and \
+					(range1 != range2):
 					return True
 	return False
 

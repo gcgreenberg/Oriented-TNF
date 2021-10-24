@@ -37,5 +37,5 @@ def correct(tmp_genome_path, candidates_path, chrom_id, window_len, stride, **ar
 		utils.print_banner('CORRECTING MISASSEMBLY ({})'.format(index+1))
 		corrected_chroms, chrom_inv = correct_misassembly(old_chroms, repeat, chrom_id)
 		save_fasta(index=index, chroms=corrected_chroms, **args)
-		utils.print_banner('CORRECTING MISASSEMBLY ({})'.format(index+1))
+		utils.print_banner('MAKING CORRECTED MATRIX ({})'.format(index+1))
 		orientation_mat_png(index, chrom_inv, window_len, stride, **args)

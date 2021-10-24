@@ -7,7 +7,8 @@ from detect.utils import utils, genome_utils
 
 def add_args(args):
 	out_dir = args['out_dir']
-	tmp_path = lambda x: os.path.join(out_dir, 'tmp', x)
+	args['tmp_dir'] = os.path.join(out_dir, 'tmp')
+	tmp_path = lambda x: os.path.join(args['tmp_dir'], x)
 	if args['chrom_id'] is None: 
 		args['chrom_id'] = genome_utils.get_default_chrom_id(args['genome_path'])
 	args['tmp_genome_path'] = tmp_path('genome.fasta')
@@ -16,7 +17,7 @@ def add_args(args):
 	args['repeats_path'] = tmp_path('nuc.coords')
 	args['delta_path'] = tmp_path('nuc.delta')
 	args['candidates_path'] = tmp_path('candidates.npy')
-	args['trans_data_path'] = os.path.join(out_dir, 'tmp', 'trans_ranges.npy')
+	args['trans_data_path'] = tmp_path('trans_ranges.npy')
 	return args
 
 def parse_args():
@@ -64,5 +65,5 @@ if __name__ == "__main__":
 			correct_inversion.correct(**args)
 	
 	if not args['save_tmp_files']:
-		os.system('rm -r {}'.format(os.path.join(out_dir,'tmp')))
+		os.system('rm -r {}'.format(args['tmp_dir']))
 		

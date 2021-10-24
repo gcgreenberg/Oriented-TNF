@@ -57,4 +57,5 @@ def detect(matrix_data_path, trans_data_path, stride, window_len, padding, **arg
 	trans_ranges = get_trans_ranges(trans_idx, window_locs, window_len, stride, padding)
 	print_transitions(trans_ranges)
 	utils.save_file(trans_data_path, trans_ranges)
-	return len(trans_ranges) >= 1
+	inversion_detected = len(trans_ranges) >= 1 and len(trans_ranges) < 6
+	return inversion_detected

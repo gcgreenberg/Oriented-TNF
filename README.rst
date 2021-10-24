@@ -15,7 +15,7 @@ Requirements
 -------------
 
 - Python 3.5+
-- MUMmer 3+ (with nucmer)
+- MUMmer 3 or MUMmer 4
 
 Check **requirements.txt** for python package requirements or run 
 
@@ -35,7 +35,7 @@ Example 1: *L. borgpetersenii* genome
 
 .. code-block:: python3
 
-    python3 detect.py --window 50000 \
+    python3 detect.py --window 100000 \
                       --stride 25000 \
                       --pad 10000 \
                       --genome data/L_borgpetersenii.fasta.gz \
