@@ -4,7 +4,7 @@ import numpy as np
 import numpy.random as rnd
 from itertools import product
 
-from invert.utils import genome_utils
+from detect.utils import genome_utils
 
 BASES = {'A','T','C','G'}
 BASE_PAIR = {'A':'T', 'T':'A', 'C':'G', 'G':'C'}
