@@ -43,6 +43,10 @@ def get_concat_genome(file):
 	genome = ''.join(chroms.values())
 	return genome
 
+def chrom_len(file, chrom_id=None):
+	chrom = get_chromosome(file, chrom_id)
+	return len(chrom)
+
 ########### WRITING FILES
 
 def write_fasta(file, chroms):

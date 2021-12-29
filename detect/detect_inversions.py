@@ -31,7 +31,7 @@ def get_trans_idx(ori_mat):
 	trans_idx = [i for i in range(1,len(ori_mat)) if ori_pca[i]!=ori_pca[i-1]]
 	return trans_idx
 
-def print_transitions(trans_ranges):
+def print_transitions(trans_ranges, summary):
 	n_ranges = len(trans_ranges)
 	if n_ranges > 2:
 		print('{} transitions detected. Too many to conclude replication site locations'.format(n_ranges))
@@ -50,12 +50,15 @@ def print_transitions(trans_ranges):
 	else:
 		assert n_ranges == 0
 		print('No inversions detected')
+	with open(summary, 'a') as fh:
+		for i,rng in enumerate(trans_ranges): 
+			fh.write('inversion transition {}: {}-{}\n'.format(i+1,rng.lower,rng.upper))
 
-def detect(matrix_data_path, trans_data_path, stride, window_len, padding, **args):
+def detect(matrix_data_path, trans_data_path, stride, window_len, padding, summary, **args):
 	ori_mat, window_locs, seq_len = utils.load_file(matrix_data_path)
 	trans_idx = get_trans_idx(ori_mat)
 	trans_ranges = get_trans_ranges(trans_idx, window_locs, window_len, stride, padding)
-	print_transitions(trans_ranges)
-	utils.save_file(trans_data_path, trans_ranges)
-	inversion_detected = len(trans_ranges) >= 1 and len(trans_ranges) < 6
-	return inversion_detected
+	print_transitions(trans_ranges, summary)
+	utils.save_file(trans_data_path, [trans_idx,trans_ranges])
+	n_transitions = len(trans_ranges) 
+	return n_transitions

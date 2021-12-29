@@ -20,22 +20,26 @@ def correct_misassembly(old_chroms, repeat, chrom_id):
 	corrected_chroms[new_chrom_id] = chrom_inv
 	return corrected_chroms, chrom_inv
 
-def save_fasta(index, chroms, **args):
-	corrected_genome_path = utils.get_corrected_genome_path(index=index, **args)
+def get_longest_repeat(candidate_repeats):
+	lens = [r.len1 for r in candidate_repeats]
+	return candidate_repeats[np.argmax(lens)]
+
+def save_fasta(chroms, **args):
+	corrected_genome_path = utils.get_corrected_genome_path(**args)
 	print('making inversion-corrected chromosome, filepath: {}'.format(corrected_genome_path))
 	genome_utils.write_fasta(corrected_genome_path, chroms)
-	
-def orientation_mat_png(index, chrom_inv, window_len, stride, **args):
-	corrected_png_path = utils.get_corrected_png_path(index=index, **args)
+
+def orientation_mat_png(chrom_inv, window_len, stride, **args):
+	corrected_png_path = utils.get_corrected_png_path(**args)
 	ori_mat, _, chrom_len = orientation_matrix.calc_ori_mat(chrom_inv, window_len, stride)
-	orientation_matrix.make_png(corrected_png_path, ori_mat, chrom_len)				
-		
+	orientation_matrix.make_png(corrected_png_path, ori_mat, chrom_len)
+
 def correct(tmp_genome_path, candidates_path, chrom_id, window_len, stride, **args):
 	old_chroms = genome_utils.get_chromosomes(tmp_genome_path)
 	candidate_repeats = utils.load_file(candidates_path)
-	for index,repeat in enumerate(candidate_repeats):
-		utils.print_banner('CORRECTING MISASSEMBLY ({})'.format(index+1))
-		corrected_chroms, chrom_inv = correct_misassembly(old_chroms, repeat, chrom_id)
-		save_fasta(index=index, chroms=corrected_chroms, **args)
-		utils.print_banner('MAKING CORRECTED MATRIX ({})'.format(index+1))
-		orientation_mat_png(index, chrom_inv, window_len, stride, **args)
+	best_repeat = get_longest_repeat(candidate_repeats)
+	utils.print_banner('CORRECTING MISASSEMBLY')
+	corrected_chroms, chrom_inv = correct_misassembly(old_chroms, best_repeat, chrom_id)
+	save_fasta(chroms=corrected_chroms, **args)
+	utils.print_banner('MAKING CORRECTED MATRIX')
+	orientation_mat_png(chrom_inv, window_len, stride, **args)
