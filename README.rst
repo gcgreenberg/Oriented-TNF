@@ -49,7 +49,7 @@ The script outputs a heatmap of the orientation matrix of the original genome fi
 
 A misassembly is detected in the genome. The inversion is corrected, and the script outputs a corrected genome in fasta format, and the corresponding orientation matrix heatmap:
 
-.. image:: data/test1/orientation_mat_corrected.png
+.. image:: data/test1/corrected_orientation_mat.png
   :width: 150pt
   :height: 150pt
 
