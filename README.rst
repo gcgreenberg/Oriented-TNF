@@ -15,7 +15,7 @@ Requirements
 -------------
 
 - Python 3.5+
-- MUMmer 3 or MUMmer 4
+- MUMmer 4
 
 Check **requirements.txt** for python package requirements or run 
 
@@ -36,22 +36,22 @@ Example 1: *E. coli* genome
 .. code-block:: python3
 
     python3 detect.py --window 150000 \
-                      --stride 25000 \
-                      --pad 10000 \
+                      --stride 50000 \
                       --genome data/E_coli_A1_136.fasta.gz \
                       --out data/test1
 
-The script outputs a heatmap of the orientation matrix of the original genome file:
+The script outputs a heatmap of the orientation matrix of the original genome file. The genome is clearly imbalanced.
 
 .. image:: data/test1/orientation_mat.png
-  :width: 150pt
-  :height: 150pt
+  :width: 180pt
+  :height: 180pt
 
-A misassembly is detected in the genome. The inversion is corrected, and the script outputs a corrected genome in fasta format, and the corresponding orientation matrix heatmap:
+A misassembly is detected in the genome. The inversion is corrected, and the script outputs a corrected genome in fasta format, and the corresponding orientation matrix heatmap.
 
 .. image:: data/test1/corrected_orientation_mat.png
-  :width: 150pt
-  :height: 150pt
+  :width: 180pt
+  :height: 180pt
+
 
 Example 2: *N. gonorrhoeaea* genome
 ----------------
@@ -63,8 +63,8 @@ Example 2: *N. gonorrhoeaea* genome
                       --genome data/N_gonorrhoeae_FA_1090.fasta.gz \
                       --out data/test2
 
-In this example, no misassembly is detected. The script outputs the location of the detected *origin* and *terminus* replication sites (1.1Mbp and 2.6Mbp) as well as the heatmap:
+In this example, no misassembly is detected, and the genome is balanced. The script outputs the location of the detected *origin* and *terminus* replication sites (0.75 and 1.90 Mbp) as well as the heatmap.
 
 .. image:: data/test2/orientation_mat.png
-  :width: 150pt
-  :height: 150pt
+  :width: 180pt
+  :height: 180pt
