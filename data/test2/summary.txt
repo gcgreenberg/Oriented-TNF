@@ -1,0 +1,6 @@
+genome file: ../Oriented-TNF/data/N_gonorrhoeae_FA_1090.fasta.gz
+sequence id chosen: AE004969.1
+window length: 150000,  stride: 50000
+output directory: test2_1
+orientation transition 1: 725000-775000
+orientation transition 2: 1875000-1925000

@@ -1,0 +1,10 @@
+genome file: ../Oriented-TNF/data/E_coli_A1_136.fasta.gz
+sequence id chosen: CP040390.1
+window length: 150000,  stride: 50000
+output directory: test1_4
+orientation transition 1: 4125000-4175000
+
+
+Misassembly detected! 1 candidate repeat found.
+Candidate #1: ~11508bp long, locations (2364304-2375811) and (4401708-4390194)
+orientation transition 1: 2625000-2675000

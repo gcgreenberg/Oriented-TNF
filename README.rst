@@ -30,15 +30,15 @@ Must be run in the Oriented-TNF directory! Description of inputs and options can
 
 Note that the path to the nucmer executable must be supplied (with ``--nucmer``) if not in PATH.
 
-Example 1: *L. borgpetersenii* genome
+Example 1: *E. coli* genome
 ---------------
 
 .. code-block:: python3
 
-    python3 detect.py --window 100000 \
+    python3 detect.py --window 150000 \
                       --stride 25000 \
                       --pad 10000 \
-                      --genome data/L_borgpetersenii.fasta.gz \
+                      --genome data/E_coli_A1_136.fasta.gz \
                       --out data/test1
 
 The script outputs a heatmap of the orientation matrix of the original genome file:
@@ -53,14 +53,14 @@ A misassembly is detected in the genome. The inversion is corrected, and the scr
   :width: 150pt
   :height: 150pt
 
-Example 2: *L. rhamnosus* genome
+Example 2: *N. gonorrhoeaea* genome
 ----------------
 
 .. code-block:: python3
 
     python3 detect.py --window 100000 \
                       --stride 50000 \
-                      --genome data/L_rhamnosus.fasta.gz \
+                      --genome data/N_gonorrhoeae_FA_1090.fasta.gz \
                       --out data/test2
 
 In this example, no misassembly is detected. The script outputs the location of the detected *origin* and *terminus* replication sites (1.1Mbp and 2.6Mbp) as well as the heatmap:
